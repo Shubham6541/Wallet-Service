@@ -1,5 +1,6 @@
-package com.tw.pathashala.wallet;
+package com.tw.pathashala.wallet.api;
 
+import com.tw.pathashala.wallet.api.HelloWorldController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

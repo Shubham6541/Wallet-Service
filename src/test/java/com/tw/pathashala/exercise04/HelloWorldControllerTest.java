@@ -1,26 +1,25 @@
 package com.tw.pathashala.exercise04;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @WebMvcTest(HelloWorldController.class)
-public class HelloWorldControllerTest {
+class HelloWorldControllerTest {
 
     @Autowired
-    private
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
     @Test
-    public void displayHelloWorldOnGet() throws Exception {
+    void displayHelloWorldOnGet() throws Exception {
         mockMvc.perform(get("/greeting"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello World"));

@@ -1,4 +1,4 @@
-package com.tw.pathashala.exercise04;
+package com.tw.pathashala.wallet;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

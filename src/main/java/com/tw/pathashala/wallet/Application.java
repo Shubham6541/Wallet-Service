@@ -1,4 +1,4 @@
-package com.tw.pathashala.exercise04;
+package com.tw.pathashala.wallet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

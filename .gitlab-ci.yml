@@ -6,5 +6,5 @@ build:
     - gradle build
   artifacts:
     reports:
-      junit: build/test-results/test/results.bin
+      junit: build/test-results/test/TEST-*.xml
 

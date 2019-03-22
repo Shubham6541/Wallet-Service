@@ -1,5 +1,17 @@
 spring:
-  h2:
-    console:
-      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      javax:
+        persistence:
+          schema-generation:
+            create-source: metadata
+            scripts:
+              action: create
+              create-target: create.sql
+
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: psql123
 

@@ -1,9 +1,9 @@
 spring:
+  profiles: dev
   jpa:
     hibernate:
       ddl-auto: validate
-
+  datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
     password: psql123
-

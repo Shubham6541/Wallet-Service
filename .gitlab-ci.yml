@@ -5,6 +5,7 @@ build:
   script:
     - gradle build
   artifacts:
+    expire_in: 1 week
     reports:
       junit: build/test-results/test/TEST-*.xml
 
@@ -24,5 +25,6 @@ code_quality:
       --volume /var/run/docker.sock:/var/run/docker.sock
       "registry.gitlab.com/gitlab-org/security-products/codequality:$SP_VERSION" /code
   artifacts:
+    expire_in: 1 week
     reports:
       codequality: gl-code-quality-report.json

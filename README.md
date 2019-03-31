@@ -26,6 +26,7 @@
         - column renaming , adding default values
 - Transactions on wallet
     - migration script for new table
+    - spring profiles
     - db relationships (one to many) , lazy loading
 
   

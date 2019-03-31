@@ -7,4 +7,5 @@ build:
   artifacts:
     reports:
       junit: build/test-results/test/TEST-*.xml
+      jacoco: build/jacocoHtml/*
 

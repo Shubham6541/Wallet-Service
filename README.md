@@ -28,6 +28,22 @@
     - migration script for new table
     - spring profiles
     - db relationships (one to many) , lazy loading
+    
+    
+
+#CD/CI
+
+## GCP
+
+```
+Create gcp account
+create project
+Create docker registry account for gitlab
+brew cask install google-cloud-sdk
+gcloud init
+gcloud projects create ep3-wallet-service
+kubectl expose deployment wallet-service --type=LoadBalancer --port 80 --target-port 8082
+```    
 
   
   

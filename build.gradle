@@ -31,7 +31,7 @@ test{
     }
 }
 
-build.dependsOn jacocoTestReport
+build.dependsOn jacocoTestCoverageVerification
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'

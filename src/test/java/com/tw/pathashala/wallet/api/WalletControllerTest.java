@@ -19,8 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(WalletController.class)
 class WalletControllerTest {
@@ -39,10 +38,9 @@ class WalletControllerTest {
         Mockito.when(walletService.create(any(Wallet.class))).thenReturn(expectedWallet);
 
         mockMvc.perform(post(BASE_PATH + "/")
-                .content("{\"name\":\"Walter White\",\"balance\":100}")
+                .content("{\"name\":\"W\",\"balance\":100}")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.balance").value("100"));
+                .andExpect(content().string(""));
 
         Mockito.verify(walletService).create(any(Wallet.class));
     }

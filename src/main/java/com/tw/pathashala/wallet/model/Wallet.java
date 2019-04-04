@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Wallet {
@@ -12,6 +13,7 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    @Size(min = 5, max = 12, message = "The category name must be {min} to {max} characters in length.")
     private String name;
 
     private int balance;

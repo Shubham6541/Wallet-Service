@@ -5,6 +5,8 @@ import com.tw.pathashala.wallet.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/wallets")
 class WalletController {
@@ -16,7 +18,7 @@ class WalletController {
     }
 
     @PostMapping
-    Wallet create(@RequestBody Wallet wallet) {
+    Wallet create(@Valid @RequestBody Wallet wallet) {
         return walletService.create(wallet);
     }
 

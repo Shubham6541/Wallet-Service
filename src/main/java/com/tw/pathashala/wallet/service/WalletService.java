@@ -12,7 +12,7 @@ public class WalletService {
 
     private WalletRepository walletRepository;
 
-    public WalletService(WalletRepository walletRepository) {
+    WalletService(WalletRepository walletRepository) {
         this.walletRepository = walletRepository;
     }
 

@@ -1,5 +1,6 @@
 package com.tw.pathashala.wallet.api;
 
+import com.tw.pathashala.wallet.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -14,17 +15,19 @@ import java.util.Map;
 @ControllerAdvice
 public class ValidationMessageHandler {
 
+    public static final String VALIDATION_FAILURE_MESSAGE = "Validation failure";
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-        protected Map<String, String> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+    protected ErrorResponse handleValidationErrors(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-        return errors;
+        return new ErrorResponse(VALIDATION_FAILURE_MESSAGE, errors);
     }
 
 }

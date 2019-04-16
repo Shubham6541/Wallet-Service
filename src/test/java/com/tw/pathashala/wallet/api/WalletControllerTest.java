@@ -1,21 +1,20 @@
 package com.tw.pathashala.wallet.api;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tw.pathashala.wallet.WalletNotFoundException;
 import com.tw.pathashala.wallet.model.Wallet;
 import com.tw.pathashala.wallet.service.WalletService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -34,15 +33,26 @@ class WalletControllerTest {
 
     @Test
     void createAWalletUsingWalletResource() throws Exception {
-        Wallet expectedWallet = wallet();
-        Mockito.when(walletService.create(any(Wallet.class))).thenReturn(expectedWallet);
+        Mockito.when(walletService.create(any(Wallet.class))).thenReturn(wallet());
+        ObjectMapper objectMapper = new ObjectMapper();
 
         mockMvc.perform(post(BASE_PATH + "/")
-                .content("{\"name\":\"W\",\"balance\":100}")
+                .content("{\"name\":\"Walter White\",\"balance\":100}")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(""));
+                .andExpect(status().isCreated())
+                .andExpect(content().string(objectMapper.writeValueAsString(wallet())));
 
         Mockito.verify(walletService).create(any(Wallet.class));
+    }
+
+    @Test
+    void expectCreateWalletToFailWhenNameIsLongerThan12Characters() throws Exception {
+        mockMvc.perform(post(BASE_PATH + "/")
+                .content("{\"name\":\"ThisNameIsTooLongForWallet\",\"balance\":100}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+        Mockito.verify(walletService, times(0)).create(any(Wallet.class));
     }
 
     @Test
@@ -65,6 +75,8 @@ class WalletControllerTest {
 
 
     private Wallet wallet() {
-        return new Wallet("Walter White", 100);
+        Wallet wallet = new Wallet("Walter White", 100);
+        wallet.setId(1L);
+        return wallet;
     }
 }

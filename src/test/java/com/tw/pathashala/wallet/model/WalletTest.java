@@ -32,4 +32,16 @@ class WalletTest {
         assertEquals("Alice", wallet.getName());
     }
 
+    @Test
+    void expectWalletBalanceToIncreaseBy100OnCreditTransctionOf100() {
+        Wallet wallet = new Wallet("Alice", 100);
+        Transaction creditOf100 = new Transaction(TransactionType.CREDIT, 100);
+
+        wallet.processTransaction(creditOf100);
+
+        assertEquals(200, wallet.getBalance());
+        assertEquals(1, wallet.getTransactions().size());
+        assertEquals(creditOf100, wallet.getTransactions().get(0));
+        assertEquals(wallet, wallet.getTransactions().get(0).getWallet());
+    }
 }

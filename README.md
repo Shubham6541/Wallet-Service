@@ -1,5 +1,7 @@
 # Exercise-04
 
+## Topics covered in classroom
+
 - Http,Rest intro
     - Model apis for simple application (facebeook post) 
 - Greeting controller
@@ -29,26 +31,23 @@
     - spring profiles
     - db relationships (one to many) , lazy loading
     
+## Topics covered in simulation    
+
+- Validations
+    - Using annotation for model validation
+    - Controller Advice for generic validation handler
+- CD/CI
+    - Separate yml files for different environment
+    - Code coverage using jacoco
+    - Deployment using Heroku
+        - https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku 
+        - add postgres addon ->  `heroku addons:create heroku-postgresql`   
+- Logging
+    - Using logback for logging
+    - logging configuration using yml and xml files
+    - logstash friendly logging for feeding data into elk    
+        
     
-
-#CD/CI
-
-##Heroku
-
-- https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku
-
-
-## GCP
-
-```
-Create gcp account
-create project
-Create docker registry account for gitlab
-brew cask install google-cloud-sdk
-gcloud init
-gcloud projects create ep3-wallet-service
-kubectl expose deployment wallet-service --type=LoadBalancer --port 80 --target-port 8082
-```    
 
   
   

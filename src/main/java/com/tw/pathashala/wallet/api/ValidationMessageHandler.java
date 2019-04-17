@@ -15,7 +15,7 @@ import java.util.Map;
 @ControllerAdvice
 public class ValidationMessageHandler {
 
-    public static final String VALIDATION_FAILURE_MESSAGE = "Validation failure";
+    static final String VALIDATION_FAILURE_MESSAGE = "Validation failure";
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

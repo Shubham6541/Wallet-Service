@@ -1,0 +1,20 @@
+<configuration>
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="STASH" class="ch.qos.logback.core.FileAppender">
+        <file>logs/server.log</file>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="STASH"/>
+    </root>
+
+</configuration>

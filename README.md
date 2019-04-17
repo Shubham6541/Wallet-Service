@@ -46,7 +46,12 @@
     - Using logback for logging
     - logging configuration using yml and xml files
     - logstash friendly logging for feeding data into elk    
-        
+- Logging
+    - Using logback for logging
+    - logging configuration using yml and xml files
+    - logstash friendly logging for feeding data into elk    
+- Cross Origins
+    - Allowing Cross origin requests        
     
 
   

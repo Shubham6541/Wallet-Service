@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/wallets")
+@CrossOrigin
 class WalletController {
     private static Logger logger = LogManager.getLogger(WalletController.class);
 

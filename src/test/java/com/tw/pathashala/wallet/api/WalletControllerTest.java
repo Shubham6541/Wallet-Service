@@ -3,10 +3,11 @@ package com.tw.pathashala.wallet.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tw.pathashala.wallet.WalletNotFoundException;
+import com.tw.pathashala.wallet.model.Transaction;
+import com.tw.pathashala.wallet.model.TransactionType;
 import com.tw.pathashala.wallet.model.Wallet;
 import com.tw.pathashala.wallet.service.WalletService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -14,11 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(WalletController.class)
@@ -34,7 +34,7 @@ class WalletControllerTest {
 
     @Test
     void createAWalletUsingWalletResource() throws Exception {
-        Mockito.when(walletService.create(any(Wallet.class))).thenReturn(wallet());
+        when(walletService.create(any(Wallet.class))).thenReturn(wallet());
         ObjectMapper objectMapper = new ObjectMapper();
 
         mockMvc.perform(post(BASE_PATH + "/")
@@ -43,7 +43,7 @@ class WalletControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().string(objectMapper.writeValueAsString(wallet())));
 
-        Mockito.verify(walletService).create(any(Wallet.class));
+        verify(walletService).create(any(Wallet.class));
     }
 
     @Test
@@ -53,7 +53,7 @@ class WalletControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
 
-        Mockito.verify(walletService, times(0)).create(any(Wallet.class));
+        verify(walletService, times(0)).create(any(Wallet.class));
     }
 
     @Test
@@ -75,6 +75,22 @@ class WalletControllerTest {
     }
 
     @Test
+    void createATransactionOnAWallet() throws Exception {
+        Transaction savedTransaction = new Transaction(TransactionType.CREDIT, 10);
+        ObjectMapper objectMapper = new ObjectMapper();
+        when(walletService.createTransaction(any(Transaction.class), eq(1L)))
+                .thenReturn(savedTransaction);
+
+        mockMvc.perform(post(BASE_PATH + "/1/transactions")
+                .content("{\"type\":\"CREDIT\",\"amount\":10}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(content().string(objectMapper.writeValueAsString(savedTransaction)));
+
+        verify(walletService).createTransaction(any(Transaction.class), eq(1L));
+    }
+
+    @Test
     void expectCrossOriginRequestsToBeSuccessful() throws Exception {
         this.mockMvc
                 .perform(get("/wallets/1")
@@ -82,7 +98,6 @@ class WalletControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(header().string("Access-Control-Allow-Origin", "*"));
     }
-
 
 
     private Wallet wallet() {

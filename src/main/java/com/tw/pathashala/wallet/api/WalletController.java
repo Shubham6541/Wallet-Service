@@ -1,12 +1,12 @@
 package com.tw.pathashala.wallet.api;
 
+import com.tw.pathashala.wallet.model.Transaction;
 import com.tw.pathashala.wallet.model.Wallet;
 import com.tw.pathashala.wallet.service.WalletService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,6 +33,12 @@ class WalletController {
     @GetMapping("/{id}")
     Wallet fetch(@PathVariable Long id) {
         return walletService.fetch(id);
+    }
+
+    @PostMapping("/{walletId}/transactions")
+    @ResponseStatus(HttpStatus.CREATED)
+    Transaction createTransaction(@RequestBody Transaction transaction, @PathVariable long walletId) {
+        return walletService.createTransaction(transaction, walletId);
     }
 
 }

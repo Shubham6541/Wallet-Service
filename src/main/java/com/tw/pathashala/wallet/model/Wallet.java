@@ -55,7 +55,7 @@ public class Wallet {
         return transactions;
     }
 
-    void processTransaction(Transaction updatedTransaction) {
+    public void processTransaction(Transaction updatedTransaction) {
         this.balance += updatedTransaction.convertedAmount();
         this.transactions.add(updatedTransaction);
         updatedTransaction.linkWallet(this);

@@ -1,19 +1,19 @@
 package com.tw.pathashala.wallet.service;
 
 
+import com.tw.pathashala.wallet.WalletNotFoundException;
+import com.tw.pathashala.wallet.model.Transaction;
+import com.tw.pathashala.wallet.model.TransactionType;
 import com.tw.pathashala.wallet.model.Wallet;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class WalletServiceTest {
 
@@ -23,24 +23,63 @@ class WalletServiceTest {
     @AfterEach
     void tearDown() {
         walletRepository.deleteAll();
+        walletRepository.deleteAll();
     }
 
     @Test
     void createAWallet() {
         WalletService walletService = new WalletService(walletRepository);
-        Wallet wallet = walletService.create(new Wallet("Walter White", 100));
-        Optional<Wallet> walletFromStore = walletRepository.findById(wallet.getId());
 
+        Wallet wallet = walletService.create(new Wallet("Walter White", 100));
+
+        Optional<Wallet> walletFromStore = walletRepository.findById(wallet.getId());
         assertEquals("Walter White", wallet.getName());
         assertEquals("Walter White", walletFromStore.get().getName());
     }
 
     @Test
     void fetchAWallet() {
-        walletRepository.save(new Wallet("Walter White", 100));
-
+        Wallet savedWallet = walletRepository.save(new Wallet("Walter White", 100));
         WalletService walletService = new WalletService(walletRepository);
-        Wallet wallet = walletService.fetch(1L);
+
+        Wallet wallet = walletService.fetch(savedWallet.getId());
+
         assertEquals("Walter White", wallet.getName());
+    }
+
+    @Test
+    void failsToFetchAWalletWithInvalidId() {
+        long invalidId = 999L;
+        WalletService walletService = new WalletService(walletRepository);
+
+        assertThrows(WalletNotFoundException.class, () -> walletService.fetch(invalidId));
+    }
+
+    @Test
+    void credit50IntoTheWallet() {
+        Wallet savedWallet = walletRepository.save(new Wallet("Walter White", 100));
+        WalletService walletService = new WalletService(walletRepository);
+        Transaction newTransaction = new Transaction(TransactionType.CREDIT, 50);
+
+        Transaction savedTransaction = walletService.createTransaction(newTransaction, savedWallet.getId());
+
+        savedWallet = walletService.fetch(savedWallet.getId());
+        assertEquals(1, savedWallet.getTransactions().size());
+        assertEquals(150, savedWallet.getBalance());
+        assertNotEquals(0, savedTransaction.getId());
+    }
+
+    @Test
+    void credit50FromTheWallet() {
+        Wallet savedWallet = walletRepository.save(new Wallet("Walter White", 100));
+        WalletService walletService = new WalletService(walletRepository);
+        Transaction newTransaction = new Transaction(TransactionType.DEBIT, 50);
+
+        Transaction savedTransaction = walletService.createTransaction(newTransaction, savedWallet.getId());
+
+        savedWallet = walletService.fetch(savedWallet.getId());
+        assertEquals(1, savedWallet.getTransactions().size());
+        assertEquals(50, savedWallet.getBalance());
+        assertEquals(1, savedTransaction.getId());
     }
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 public class Transaction {
     @ApiModelProperty(position = 1, required = true, value = "transaction id")
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ApiModelProperty(position = 2, required = true, value = "transaction amount")

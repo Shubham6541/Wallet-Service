@@ -24,7 +24,7 @@ public class Wallet {
     private int balance;
 
     @ApiModelProperty(position = 3, value = "Set of Transactions of the api ")
-    @OneToMany(mappedBy = "api", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Transaction> transactions = new ArrayList<>();
 
 

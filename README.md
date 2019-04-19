@@ -45,14 +45,13 @@
     - Deployment using Heroku
         - https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku 
         - add postgres addon ->  `heroku addons:create heroku-postgresql`   
+- Docker
+    - custom docker file for application (devops/Dockefile) 
 - Logging
     - Using logback for logging
     - logging configuration using yml and xml files
-    - logstash friendly logging for feeding data into elk    
-- Logging
-    - Using logback for logging
-    - logging configuration using yml and xml files
-    - logstash friendly logging for feeding data into elk    
+    - logstash friendly logging for feeding data into elk  
+    - moving logs to elk using logstash (devops/logstash)  
 - Cross Origins
     - Allowing Cross origin requests        
     

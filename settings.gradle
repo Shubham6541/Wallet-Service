@@ -3,4 +3,4 @@ pluginManagement {
 		gradlePluginPortal()
 	}
 }
-rootProject.name = 'exercise-04'
+rootProject.name = 'wallet-service'

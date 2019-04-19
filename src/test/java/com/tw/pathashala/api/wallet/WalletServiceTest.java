@@ -1,10 +1,8 @@
-package com.tw.pathashala.wallet.service;
+package com.tw.pathashala.api.wallet;
 
 
-import com.tw.pathashala.wallet.WalletNotFoundException;
-import com.tw.pathashala.wallet.model.Transaction;
-import com.tw.pathashala.wallet.model.TransactionType;
-import com.tw.pathashala.wallet.model.Wallet;
+import com.tw.pathashala.api.transaction.Transaction;
+import com.tw.pathashala.api.transaction.TransactionType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

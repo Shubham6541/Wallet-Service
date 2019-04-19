@@ -1,6 +1,5 @@
-package com.tw.pathashala.wallet.service;
+package com.tw.pathashala.api.wallet;
 
-import com.tw.pathashala.wallet.model.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

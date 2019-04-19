@@ -1,4 +1,4 @@
-package com.tw.pathashala.wallet.model;
+package com.tw.pathashala.api.error;
 
 import java.util.Map;
 

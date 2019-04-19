@@ -1,6 +1,8 @@
-package com.tw.pathashala.wallet.model;
+package com.tw.pathashala.api.wallet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tw.pathashala.api.transaction.Transaction;
+import com.tw.pathashala.api.transaction.TransactionType;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

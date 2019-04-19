@@ -1,6 +1,7 @@
-package com.tw.pathashala.wallet.model;
+package com.tw.pathashala.api.transaction;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tw.pathashala.api.wallet.Wallet;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,7 +19,7 @@ public class Transaction {
     @ApiModelProperty(position = 2, required = true, value = "transaction amount")
     private int amount;
 
-    @ApiModelProperty(position = 3, required = true, value = "wallet id for each transaction")
+    @ApiModelProperty(position = 3, required = true, value = "api id for each transaction")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_id")
     @JsonIgnore
@@ -34,7 +35,7 @@ public class Transaction {
     @ApiModelProperty(position = 6, value = "Remarks")
     private String remarks;
 
-    public Transaction(Wallet wallet, TransactionType type, int amount, Date date, String remarks) {
+    Transaction(Wallet wallet, TransactionType type, int amount, Date date, String remarks) {
         this.wallet = wallet;
         this.type = type;
         this.amount = amount;
@@ -74,11 +75,11 @@ public class Transaction {
         return wallet;
     }
 
-    void linkWallet(Wallet wallet) {
+    public void linkWallet(Wallet wallet) {
         this.wallet = wallet;
     }
 
-    int convertedAmount() {
+    public int convertedAmount() {
         return this.getType() == TransactionType.DEBIT ? -1 * this.amount : this.amount;
     }
 

@@ -1,6 +1,6 @@
-package com.tw.pathashala.wallet.api;
+package com.tw.pathashala.api.common;
 
-import com.tw.pathashala.wallet.model.ErrorResponse;
+import com.tw.pathashala.api.error.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

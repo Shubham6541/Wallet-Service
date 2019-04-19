@@ -1,8 +1,6 @@
-package com.tw.pathashala.wallet.service;
+package com.tw.pathashala.api.wallet;
 
-import com.tw.pathashala.wallet.WalletNotFoundException;
-import com.tw.pathashala.wallet.model.Transaction;
-import com.tw.pathashala.wallet.model.Wallet;
+import com.tw.pathashala.api.transaction.Transaction;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,15 +15,15 @@ public class WalletService {
         this.walletRepository = walletRepository;
     }
 
-    public Wallet create(Wallet wallet) {
+    Wallet create(Wallet wallet) {
         return walletRepository.save(wallet);
     }
 
-    public Wallet fetch(Long id) {
+    Wallet fetch(Long id) {
         return walletRepository.findById(id).orElseThrow(WalletNotFoundException::new);
     }
 
-   public Transaction createTransaction(Transaction transaction, long walletId) {
+    Transaction createTransaction(Transaction transaction, long walletId) {
         Wallet savedWallet = fetch(walletId);
         savedWallet.processTransaction(transaction);
         Wallet updatedWallet = create(savedWallet);

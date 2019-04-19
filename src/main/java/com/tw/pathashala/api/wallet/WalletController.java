@@ -1,8 +1,6 @@
-package com.tw.pathashala.wallet.api;
+package com.tw.pathashala.api.wallet;
 
-import com.tw.pathashala.wallet.model.Transaction;
-import com.tw.pathashala.wallet.model.Wallet;
-import com.tw.pathashala.wallet.service.WalletService;
+import com.tw.pathashala.api.transaction.Transaction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +24,7 @@ class WalletController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     Wallet create(@Valid @RequestBody Wallet wallet) {
-        logger.info(() -> "Creating wallet with amount: " + wallet.getBalance());
+        logger.info(() -> "Creating api with amount: " + wallet.getBalance());
         return walletService.create(wallet);
     }
 

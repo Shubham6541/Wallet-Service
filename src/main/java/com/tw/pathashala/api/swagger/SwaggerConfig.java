@@ -1,4 +1,4 @@
-package com.tw.pathashala.wallet.swagger;
+package com.tw.pathashala.api.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

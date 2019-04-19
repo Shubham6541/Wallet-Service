@@ -1,12 +1,9 @@
-package com.tw.pathashala.wallet.api;
+package com.tw.pathashala.api.wallet;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tw.pathashala.wallet.WalletNotFoundException;
-import com.tw.pathashala.wallet.model.Transaction;
-import com.tw.pathashala.wallet.model.TransactionType;
-import com.tw.pathashala.wallet.model.Wallet;
-import com.tw.pathashala.wallet.service.WalletService;
+import com.tw.pathashala.api.transaction.Transaction;
+import com.tw.pathashala.api.transaction.TransactionType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

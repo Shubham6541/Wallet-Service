@@ -1,4 +1,4 @@
-package com.tw.pathashala.wallet.api;
+package com.tw.pathashala.api;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

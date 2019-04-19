@@ -1,4 +1,4 @@
-package com.tw.pathashala.wallet;
+package com.tw.pathashala.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;

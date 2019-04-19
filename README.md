@@ -13,11 +13,13 @@
     - Organizing project (Controller,Service,Repository)
     - Unit testing using SpringBoot test 
     - In Memory database (h2) and Console
+        `http://localhost:8080/h2-console`
     - Spring JPA, ORM    
 - Second Story Get on wallet
     - Swagger Documentation
         `https://editor.swagger.io/`
         `http://localhost:8080/v2/api-docs`
+        `http://localhost:8080/swagger-ui.html`
     - Using Postgres instead of in memory DB
         `docker run --name postgresdb -e POSTGRES_PASSWORD=psql123 -p 5432:5432 -d postgres`
         `brew cask install pgadmin4`   
@@ -30,6 +32,7 @@
     - migration script for new table
     - spring profiles
     - db relationships (one to many) , lazy loading
+    - storing enumerations
     
 ## Topics covered in simulation    
 

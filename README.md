@@ -44,7 +44,8 @@
     - Code coverage using jacoco
     - Deployment using Heroku
         - https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku 
-        - add postgres addon ->  `heroku addons:create heroku-postgresql`   
+        - add postgres addon ->  `heroku addons:create heroku-postgresql`
+        - prod url -> `https://pathashala-wallet-service.herokuapp.com/wallets/1`   
 - Docker
     - custom docker file for application (devops/Dockefile) 
 - Logging

@@ -4,11 +4,13 @@ package com.tw.pathashala.api.wallet;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tw.pathashala.api.transaction.Transaction;
 import com.tw.pathashala.api.transaction.TransactionType;
+import com.tw.pathashala.api.user.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -19,6 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(WalletController.class)
+@WithMockUser
 class WalletControllerTest {
 
     private static final String BASE_PATH = "/wallets";
@@ -28,6 +31,9 @@ class WalletControllerTest {
 
     @MockBean
     private WalletService walletService;
+
+    @MockBean
+    UserRepository userRepository;
 
     @Test
     void createAWalletUsingWalletResource() throws Exception {

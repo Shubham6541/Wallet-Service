@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/wallets")
@@ -39,4 +40,8 @@ class WalletController {
         return walletService.createTransaction(transaction, walletId);
     }
 
+    @GetMapping("/{walletId}/transactions")
+    List<Transaction> listTransactions(@PathVariable long walletId) {
+        return walletService.transactions(walletId);
+    }
 }

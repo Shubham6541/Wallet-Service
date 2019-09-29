@@ -1,6 +1,7 @@
 package com.tw.pathashala.api.wallet;
 
 import com.tw.pathashala.api.transaction.Transaction;
+import com.tw.pathashala.api.transaction.TransactionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.List;
 public class WalletService {
 
     private WalletRepository walletRepository;
+    private TransactionRepository transactionRepository;
 
-    WalletService(WalletRepository walletRepository) {
+    WalletService(WalletRepository walletRepository, TransactionRepository transactionRepository) {
         this.walletRepository = walletRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     Wallet create(Wallet wallet) {
@@ -29,5 +32,9 @@ public class WalletService {
         Wallet updatedWallet = create(savedWallet);
         List<Transaction> transactions = updatedWallet.getTransactions();
         return transactions.get(transactions.size() - 1);
+    }
+
+    List<Transaction> transactions(long walletId) {
+        return transactionRepository.findAll();
     }
 }

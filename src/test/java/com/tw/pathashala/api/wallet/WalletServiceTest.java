@@ -2,6 +2,7 @@ package com.tw.pathashala.api.wallet;
 
 
 import com.tw.pathashala.api.transaction.Transaction;
+import com.tw.pathashala.api.transaction.TransactionRepository;
 import com.tw.pathashala.api.transaction.TransactionType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,9 @@ class WalletServiceTest {
     @Autowired
     WalletRepository walletRepository;
 
+    @Autowired
+    TransactionRepository transactionRepository;
+
     @AfterEach
     void tearDown() {
         walletRepository.deleteAll();
@@ -26,7 +30,7 @@ class WalletServiceTest {
 
     @Test
     void createAWallet() {
-        WalletService walletService = new WalletService(walletRepository);
+        WalletService walletService = new WalletService(walletRepository, transactionRepository);
 
         Wallet wallet = walletService.create(new Wallet("Walter White", 100));
 
@@ -38,7 +42,7 @@ class WalletServiceTest {
     @Test
     void fetchAWallet() {
         Wallet savedWallet = walletRepository.save(new Wallet("Walter White", 100));
-        WalletService walletService = new WalletService(walletRepository);
+        WalletService walletService = new WalletService(walletRepository, transactionRepository);
 
         Wallet wallet = walletService.fetch(savedWallet.getId());
 
@@ -48,7 +52,7 @@ class WalletServiceTest {
     @Test
     void failsToFetchAWalletWithInvalidId() {
         long invalidId = 999L;
-        WalletService walletService = new WalletService(walletRepository);
+        WalletService walletService = new WalletService(walletRepository, transactionRepository);
 
         assertThrows(WalletNotFoundException.class, () -> walletService.fetch(invalidId));
     }
@@ -56,7 +60,7 @@ class WalletServiceTest {
     @Test
     void credit50IntoTheWallet() {
         Wallet savedWallet = walletRepository.save(new Wallet("Walter White", 100));
-        WalletService walletService = new WalletService(walletRepository);
+        WalletService walletService = new WalletService(walletRepository, transactionRepository);
         Transaction newTransaction = new Transaction(TransactionType.CREDIT, 50);
 
         Transaction savedTransaction = walletService.createTransaction(newTransaction, savedWallet.getId());
@@ -70,7 +74,7 @@ class WalletServiceTest {
     @Test
     void credit50FromTheWallet() {
         Wallet savedWallet = walletRepository.save(new Wallet("Walter White", 100));
-        WalletService walletService = new WalletService(walletRepository);
+        WalletService walletService = new WalletService(walletRepository, transactionRepository);
         Transaction newTransaction = new Transaction(TransactionType.DEBIT, 50);
 
         Transaction savedTransaction = walletService.createTransaction(newTransaction, savedWallet.getId());

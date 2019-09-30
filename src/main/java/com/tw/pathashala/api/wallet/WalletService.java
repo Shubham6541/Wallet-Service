@@ -35,6 +35,6 @@ public class WalletService {
     }
 
     List<Transaction> transactions(long walletId) {
-        return transactionRepository.findAll();
+        return transactionRepository.findAllByWalletId(walletId);
     }
 }

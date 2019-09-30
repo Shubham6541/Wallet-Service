@@ -1,6 +1,7 @@
 package com.tw.pathashala.api.wallet;
 
 import com.tw.pathashala.api.transaction.Transaction;
+import com.tw.pathashala.api.user.User;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -27,6 +28,9 @@ public class Wallet {
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Transaction> transactions = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Wallet() {
     }
@@ -34,6 +38,12 @@ public class Wallet {
     Wallet(String name, int balance) {
         this.name = name;
         this.balance = balance;
+    }
+
+    public Wallet(String name, int balance, User user) {
+        this.name = name;
+        this.balance = balance;
+        this.user = user;
     }
 
     public String getName() {

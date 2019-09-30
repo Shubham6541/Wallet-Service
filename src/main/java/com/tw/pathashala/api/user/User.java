@@ -1,5 +1,6 @@
 package com.tw.pathashala.api.user;
 
+import com.tw.pathashala.api.wallet.Wallet;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,6 +20,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @OneToOne(mappedBy = "user")
+    Wallet wallet;
+
     public User(String userName, String password) {
         this.userName = userName;
         setPassword(password);
@@ -37,6 +41,10 @@ public class User {
 
     Long getId() {
         return id;
+    }
+
+    public Long walletId() {
+        return wallet.getId();
     }
 
     void setPassword(String password) {

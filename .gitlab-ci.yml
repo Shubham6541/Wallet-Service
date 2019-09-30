@@ -10,7 +10,7 @@ build:
       junit: build/test-results/test/TEST-*.xml
 
 
-prod-deploy:
+stg-deploy:
   stage: deploy
   image: ruby:latest
   script:

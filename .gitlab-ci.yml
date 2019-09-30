@@ -17,6 +17,6 @@ prod-deploy:
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
-    - dpl --provider=heroku --app=pathashala-legacy-wallet-service --api-key=$HEROKU_TOKEN
+    - dpl --provider=heroku --app=tw-legacy-wallet-service --api-key=$HEROKU_TOKEN
   only:
     - master

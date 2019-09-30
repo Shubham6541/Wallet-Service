@@ -23,6 +23,10 @@ jacocoTestReport {
     }
 }
 
+bootRun {
+    bootRun.systemProperty 'spring.profiles.active', "${springProfile}"
+}
+
 test{
     systemProperty 'spring.profiles.active', 'test'
     useJUnitPlatform()

@@ -18,7 +18,7 @@ public class WalletService {
         this.transactionRepository = transactionRepository;
     }
 
-    Wallet create(Wallet wallet) {
+    public Wallet create(Wallet wallet) {
         return walletRepository.save(wallet);
     }
 

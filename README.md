@@ -1,6 +1,6 @@
 # Setup service
 
-##Install java
+## Install java
 - Install jdk11
 - Verify installed java version by running command
 ```shell script
@@ -8,9 +8,9 @@ java -version
 javac -version
 ```
 
-##Install postgres
+## Install postgres
 
-##Run the application
+## Run the application
 - Build the application and run the test along with coverage
 ```shell script
 ./gradlew build

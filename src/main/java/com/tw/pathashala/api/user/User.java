@@ -20,8 +20,8 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "user")
-    Wallet wallet;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Wallet wallet;
 
     public User(String userName, String password) {
         this.userName = userName;

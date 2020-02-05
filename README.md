@@ -32,3 +32,9 @@ javac -version
     ```
     - Connect to db command
     `psql -h localhost -U postgres -d postgres` 
+    
+# Follow the instructions to run Application in intellij
+Edit configurations -> Extract Templates -> Select Application -> Add -ea -Dspring.profiles.active=dev to VM options
+
+# Documentation
+URL: http://localhost:8080/swagger-ui.html    

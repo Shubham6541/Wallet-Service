@@ -40,8 +40,8 @@ class WalletController {
         return walletService.createTransaction(transaction, walletId);
     }
 
-    @GetMapping("/{walletId}/transactions")
-    List<Transaction> listTransactions(@PathVariable long walletId) {
-        return walletService.transactions(walletId);
+    @GetMapping("/{walletId}/transactions/{pageNumber}")
+    List<Transaction> listTransactions(@PathVariable long walletId, int pageNumber) {
+        return walletService.transactions(walletId,pageNumber);
     }
 }

@@ -1,12 +1,12 @@
 package com.tw.pathashala.api.transaction;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-    List<Transaction> findTop5ByWalletIdOrderByDateDesc(Long walletId);
+    List<Transaction> findAllByWalletIdOrderByDateDesc(Long walletId, Pageable pageable);
 }

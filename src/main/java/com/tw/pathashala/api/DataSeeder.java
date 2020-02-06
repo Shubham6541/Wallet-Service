@@ -14,7 +14,7 @@ public class DataSeeder {
     CommandLineRunner initDatabase(UserRepository repository, WalletService walletService) {
         return args -> {
             if(repository.findByUserName("seed-user-1").isEmpty()) {
-                User savedUser = repository.save(new User("seed-user-1", "foobar"));
+                User savedUser = repository.save(new User("seed1-user-1", "foobar"));
                 walletService.create(new Wallet("Savings", 0, savedUser));
             }
             if(repository.findByUserName("seed-user-2").isEmpty()) {

@@ -35,6 +35,6 @@ public class WalletService {
     }
 
     List<Transaction> transactions(long walletId) {
-        return transactionRepository.findAllByWalletId(walletId);
+        return transactionRepository.findTop5ByWalletIdOrderByDateDesc(walletId);
     }
 }

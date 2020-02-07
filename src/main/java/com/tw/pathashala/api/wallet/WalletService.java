@@ -2,6 +2,7 @@ package com.tw.pathashala.api.wallet;
 
 import com.tw.pathashala.api.transaction.Transaction;
 import com.tw.pathashala.api.transaction.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,9 @@ import java.util.List;
 
 @Service
 public class WalletService {
-
+    @Autowired
     private WalletRepository walletRepository;
+    @Autowired
     private TransactionRepository transactionRepository;
 
     WalletService(WalletRepository walletRepository, TransactionRepository transactionRepository) {
@@ -36,8 +38,8 @@ public class WalletService {
         return transactions.get(transactions.size() - 1);
     }
 
-    List<Transaction> transactions(long walletId,int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber, 5);
-        return transactionRepository.findAllByWalletIdOrderByDateDesc(walletId,pageable);
+    List<Transaction> transactions(long walletId, int numberOfTransaction) {
+        Pageable pageable = PageRequest.of(0, numberOfTransaction);
+        return transactionRepository.findAllByWalletIdOrderByDateDesc(walletId, pageable);
     }
 }

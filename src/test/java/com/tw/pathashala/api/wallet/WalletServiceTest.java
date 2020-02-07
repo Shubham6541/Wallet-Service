@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -83,5 +84,22 @@ class WalletServiceTest {
         assertEquals(1, savedWallet.getTransactions().size());
         assertEquals(50, savedWallet.getBalance());
         assertEquals(1, savedTransaction.getId());
+    }
+
+    @Test
+    void recentTransactionsList() {
+        Wallet savedWallet = walletRepository.save(new Wallet("Walter White", 100));
+        WalletService walletService = new WalletService(walletRepository, transactionRepository);
+        Transaction transaction = new Transaction(TransactionType.CREDIT, 100);
+        Transaction anotherTransaction = new Transaction(TransactionType.DEBIT, 50);
+
+        Transaction savedTransaction = walletService.createTransaction(transaction, savedWallet.getId());
+        Transaction anotherSavedTransaction = walletService.createTransaction(transaction, savedWallet.getId());
+
+        savedWallet = walletService.fetch(savedWallet.getId());
+        List<Transaction> recentTransactionList = walletService.transactions(savedWallet.getId(),1);
+        assertEquals(1,recentTransactionList.size());
+        assertEquals(anotherSavedTransaction.getDate(),recentTransactionList.get(0).getDate());
+        assertEquals(anotherSavedTransaction.getId(),recentTransactionList.get(0).getId());
     }
 }

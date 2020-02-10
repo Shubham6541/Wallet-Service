@@ -44,4 +44,6 @@ class WalletController {
     List<Transaction> listTransactions(@PathVariable long walletId, int pageNumber) {
         return walletService.transactions(walletId,pageNumber);
     }
+
+
 }

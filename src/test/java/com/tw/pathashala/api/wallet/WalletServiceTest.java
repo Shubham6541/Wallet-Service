@@ -94,7 +94,7 @@ class WalletServiceTest {
         Transaction anotherTransaction = new Transaction(TransactionType.DEBIT, 50);
 
         Transaction savedTransaction = walletService.createTransaction(transaction, savedWallet.getId());
-        Transaction anotherSavedTransaction = walletService.createTransaction(transaction, savedWallet.getId());
+        Transaction anotherSavedTransaction = walletService.createTransaction(anotherTransaction, savedWallet.getId());
 
         savedWallet = walletService.fetch(savedWallet.getId());
         List<Transaction> recentTransactionList = walletService.transactions(savedWallet.getId(),1);

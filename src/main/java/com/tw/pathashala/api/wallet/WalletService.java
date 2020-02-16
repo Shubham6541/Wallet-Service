@@ -2,12 +2,15 @@ package com.tw.pathashala.api.wallet;
 
 import com.tw.pathashala.api.transaction.Transaction;
 import com.tw.pathashala.api.transaction.TransactionRepository;
+import com.tw.pathashala.api.transaction.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.tw.pathashala.api.transaction.TransactionType.*;
 
 
 @Service
@@ -41,5 +44,21 @@ public class WalletService {
     List<Transaction> transactions(long walletId, int numberOfTransaction) {
         Pageable pageable = PageRequest.of(0, numberOfTransaction);
         return transactionRepository.findAllByWalletIdOrderByDateDesc(walletId, pageable);
+    }
+
+    Transaction createTransaction(TransferRequest transferRequest, long walletId){
+        if(transferRequest.getReceiverWalletId() != 0){
+            Transaction transaction = new Transaction(DEBIT, transferRequest.getAmount(),transferRequest.getRemarks());
+            return transfer(transaction,walletId, transferRequest.getReceiverWalletId());
+        }
+        Transaction transaction = new Transaction( transferRequest.getTransactionType(),transferRequest.getAmount(),transferRequest.getRemarks());
+        return createTransaction(transaction, walletId);
+    }
+
+    Transaction transfer(Transaction transaction, long walletId, long receiverWalletId) {
+        Transaction response = createTransaction(transaction, walletId);
+        Transaction receiverTransaction = new Transaction(CREDIT, transaction.getAmount(), transaction.getRemarks());
+        createTransaction(receiverTransaction, receiverWalletId);
+        return response;
     }
 }

@@ -48,6 +48,11 @@ public class Transaction {
         this.amount = amount;
     }
 
+    public Transaction(TransactionType type, int amount,String remarks) {
+        this.type = type;
+        this.amount = amount;
+    }
+
     public Transaction() {
     }
 
@@ -82,6 +87,8 @@ public class Transaction {
     public int convertedAmount() {
         return this.getType() == TransactionType.DEBIT ? -1 * this.amount : this.amount;
     }
+
+
 
     @PrePersist
     protected void onCreate() {

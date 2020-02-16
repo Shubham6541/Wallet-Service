@@ -36,13 +36,19 @@ class WalletController {
 
     @PostMapping("/{walletId}/transactions")
     @ResponseStatus(HttpStatus.CREATED)
-    Transaction createTransaction(@RequestBody Transaction transaction, @PathVariable long walletId) {
-        return walletService.createTransaction(transaction, walletId);
+    Transaction createTransaction(@RequestBody TransferRequest transferRequest, @PathVariable long walletId) {
+        return walletService.createTransaction(transferRequest, walletId);
     }
 
     @GetMapping("/{walletId}/transactions/{pageNumber}")
     List<Transaction> listTransactions(@PathVariable long walletId, int pageNumber) {
         return walletService.transactions(walletId,pageNumber);
+    }
+
+    @PostMapping("/{walletId}/transfer/{receiverWalletId}")
+    @ResponseStatus(HttpStatus.CREATED)
+    Transaction transfer(@RequestBody Transaction transaction, @PathVariable long walletId, @PathVariable long receiverWalletId) {
+        return walletService.transfer(transaction, walletId, receiverWalletId);
     }
 
 

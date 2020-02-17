@@ -38,5 +38,14 @@ class UserServiceTest {
         void shouldNotLoadWhenUserDoesNotExist() {
             assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername("Jane"));
         }
+
+        @Test
+        void shouldRegisterUser() {
+            User user = new User("John", "FooBar");
+            userService.register(user);
+            UserDetails userDetails = userService.loadUserByUsername("John");
+
+            assertEquals("John", userDetails.getUsername());
+        }
     }
 }

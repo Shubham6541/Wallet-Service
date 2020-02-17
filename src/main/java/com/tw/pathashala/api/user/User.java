@@ -47,7 +47,15 @@ public class User {
         return wallet.getId();
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     void setPassword(String password) {
         this.password = PASSWORD_ENCODER.encode(password);
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -31,7 +31,7 @@ public class User {
     public User() {
     }
 
-    String getUserName() {
+    public String getUserName() {
         return userName;
     }
 
@@ -57,5 +57,13 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public void add(Wallet createdWallet) {
+        this.wallet = createdWallet;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 }

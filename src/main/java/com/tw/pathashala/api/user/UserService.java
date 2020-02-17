@@ -1,5 +1,6 @@
 package com.tw.pathashala.api.user;
 
+import com.tw.pathashala.api.wallet.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    WalletService walletService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -28,6 +32,9 @@ public class UserService implements UserDetailsService {
     }
 
     public User register(User user) {
-        return userRepository.save(user);
+        User user1 =  new User(user.getUserName(),user.getPassword());
+        user.getWallet().setUser(userRepository.save(user1));
+        userRepository.save(user1).add(walletService.create(user.getWallet()));
+        return userRepository.save(user1);
     }
 }

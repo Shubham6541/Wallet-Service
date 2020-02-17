@@ -35,7 +35,7 @@ public class Wallet {
     public Wallet() {
     }
 
-    Wallet(String name, int balance) {
+    public Wallet(String name, int balance) {
         this.name = name;
         this.balance = balance;
     }
@@ -64,6 +64,10 @@ public class Wallet {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void processTransaction(Transaction updatedTransaction) {
